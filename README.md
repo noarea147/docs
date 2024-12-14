@@ -277,3 +277,4 @@ Create a new product for a specific business.
 - **Dependencies:** The server uses `dotenv`, `Mongoose` models for database interactions, and custom utility functions.
 
 For further assistance, contact the backend team or refer to the server’s codebase.# docs
+# docs
