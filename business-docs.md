@@ -14,7 +14,7 @@ This document describes the endpoints and methods available for managing busines
 
 ### 1. Create Business
 
-**Endpoint:** `POST /createBusiness`
+**Endpoint:** `POST /business/createBusiness`
 
 **Description:** Creates a new business and associates it with the requesting user.
 
