@@ -110,22 +110,22 @@ Fetch products based on a partial or full name match.
 
 ---
 
-### 4. Get Products by Category
+### 4. Get Products by Product Category
 
 **Endpoint:**
 
 ```
-POST /products/getProductByCategory
+POST /products/getProductByProductCategory
 ```
 
 **Description:**
-Fetch products that belong to a specific category.
+Fetch products that belong to a specific product category.
 
 **Request Body:**
 
 ```json
 {
-  "categoryId": "category-id",
+  "ProductCategoryId": "category-id",
   "limit": 10
 }
 ```
@@ -235,16 +235,14 @@ Create a new product for a specific business.
   "specification": "product-specification",
   "variants": [
     {
-      "attributes": [
-        { "attribute": "size", "value": "large" }
-      ],
+      "attributes": [{ "attribute": "size", "value": "large" }],
       "price": 100,
       "status": "inStock"
     }
   ],
   "image": "image-url",
   "status": "PUBLISHED",
-  "category": "category-id",
+  "productCategory": "product-category-id",
   "businessId": "business-id"
 }
 ```
@@ -277,4 +275,5 @@ Create a new product for a specific business.
 - **Dependencies:** The server uses `dotenv`, `Mongoose` models for database interactions, and custom utility functions.
 
 For further assistance, contact the backend team or refer to the server’s codebase.# docs
+
 # docs
