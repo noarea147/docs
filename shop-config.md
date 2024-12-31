@@ -1,124 +1,85 @@
 # Save Shop Config API Documentation
 
 ## Overview
+This documentation provides details for the API endpoints related to saving and retrieving shop configurations for businesses.
 
-The `saveShopConfig` endpoint allows users to save or update the configuration for a specific business. If the configuration does not exist for the given business ID, a new record will be created.
+---
 
-## Endpoint
+## Endpoints
 
-**URL:** `/saveShopConfig`
+### 1. Save Shop Config
 
-**Method:** `POST`
+**Endpoint:** `POST /saveShopConfig`
 
-**Description:** Saves or updates shop configuration for a business.
+**Description:** Saves the shop configuration for a specific business. If a configuration already exists for the business, it updates the existing configuration.
 
-## Request Body
-
+**Request Body:**
 ```json
 {
-  "config": "object", // Configuration details for the shop
-  "businessId": "string" // Valid MongoDB ObjectId of the business
+  "config": "object",
+  "businessId": "string"
 }
 ```
 
-### Fields
-
-- **config** (required): The configuration object containing details about the shop.
-- **businessId** (required): A valid MongoDB ObjectId representing the business.
-
-## Responses
-
-### Success Response
-
-**Status Code:** `200`
-
+**Response:**
+- 200: Shop config saved successfully.
 ```json
 {
   "message": "Shop config saved successfully",
-  "data": {
-    "_id": "string",
-    "businessId": "string",
-    "config": "object",
-    "__v": "number"
-  }
+  "data": "updatedConfigObject"
 }
 ```
-
-- **message:** A success message.
-- **data:** The saved or updated shop configuration document.
-
-### Error Responses
-
-**Status Code:** `400`
-
-- **Invalid business ID:**
-  ```json
-  {
-    "message": "Invalid business ID"
-  }
-  ```
-- **Config is required:**
-  ```json
-  {
-    "message": "Config is required"
-  }
-  ```
-
-**Status Code:** `500`
-
-- **Internal Server Error:**
-  ```json
-  {
-    "message": "Something went wrong while saving shop config"
-  }
-  ```
-
-## Implementation Details
-
-The `saveShopConfig` function performs the following steps:
-
-1. Validates the `businessId` field to ensure it is a valid MongoDB ObjectId.
-2. Checks if the `config` field is provided.
-3. Uses `findOneAndUpdate` with the `upsert` option to save or update the configuration:
-   - If a record for the `businessId` exists, it is updated.
-   - If no record exists, a new record is created.
-4. Returns the updated configuration or an error message.
-
-## Error Handling
-
-- Validates input data to prevent invalid or missing fields.
-- Catches and logs any unexpected errors.
-
-## Example Request
-
-### Request
-
-```bash
-POST /saveShopConfig
-Content-Type: application/json
-
-{
-  "config": {
-    "theme": "dark",
-    "currency": "USD"
-  },
-  "businessId": "64e20c3a88a1d8e74110a8b2"
-}
-```
-
-### Response
-
+- 400: Invalid business ID or missing config.
 ```json
 {
-  "message": "Shop config saved successfully",
-  "data": {
-    "_id": "64e20c3a88a1d8e74110a8b2",
-    "businessId": "64e20c3a88a1d8e74110a8b2",
-    "config": {
-      "theme": "dark",
-      "currency": "USD"
-    },
-    "__v": 0
-  }
+  "message": "Invalid business ID"
 }
 ```
+```json
+{
+  "message": "Config is required"
+}
+```
+- 500: Internal server error.
+```json
+{
+  "message": "Something went wrong while saving shop config"
+}
+```
+
+---
+
+### 2. Get Shop Config By Business ID
+
+**Endpoint:** `POST /getShopConfigByBusinessId`
+
+**Description:** Fetches the shop configuration for a specific business by its ID.
+
+**Request Body:**
+```json
+{
+  "businessId": "string"
+}
+```
+
+**Response:**
+- 200: Shop config fetched successfully.
+```json
+{
+  "message": "Shop config fetched successfully",
+  "data": "shopConfigObject"
+}
+```
+- 400: Invalid business ID.
+```json
+{
+  "message": "Invalid business ID"
+}
+```
+- 500: Internal server error.
+```json
+{
+  "message": "Something went wrong while saving shop config"
+}
+```
+
