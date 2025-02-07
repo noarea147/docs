@@ -1,7 +1,7 @@
 # Get All Product Categories
 
 **Endpoint**:  
-`POST /categories/getAllProductCategories`
+`POST /product-categories/getProductCategories`
 
 **Description**:  
 Retrieves a list of product categories with an optional limit on the number of categories returned.
