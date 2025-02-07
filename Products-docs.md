@@ -115,7 +115,7 @@ Fetch products based on a partial or full name match.
 **Endpoint:**
 
 ```
-POST /products/getProductByProductCategory
+GET /products/getProductByProductCategory
 ```
 
 **Description:**
