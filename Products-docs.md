@@ -1,6 +1,6 @@
-# API Documentation InkLink backend
+# API Documentation - InkLink Backend
 
-This document outlines the endpoints available on the Node.js server and their respective usage for integrating with a Unity application. Each endpoint is described in detail, including the required request body, method, and example responses.
+This document outlines the available endpoints for the InkLink backend, built with Node.js. It provides details on each endpoint's usage, request format, and expected responses.
 
 ---
 
@@ -115,7 +115,7 @@ Fetch products based on a partial or full name match.
 **Endpoint:**
 
 ```
-GET /products/getProductByProductCategory
+POST /products/getProductByProductCategory
 ```
 
 **Description:**
@@ -125,7 +125,8 @@ Fetch products that belong to a specific product category.
 
 ```json
 {
-  "ProductCategoryId": "category-id",
+  "productCategoryId": "category-id",
+  "businessId": "business-id",
   "limit": 10
 }
 ```
@@ -134,7 +135,7 @@ Fetch products that belong to a specific product category.
 
 ```json
 {
-  "message": "Categories fetched successfully",
+  "message": "Products fetched successfully",
   "data": [ ... ],
   "status": 200
 }
@@ -267,6 +268,52 @@ Create a new product for a specific business.
 
 ---
 
+### 8. Update a Product
+
+**Endpoint:**
+
+```
+POST /products/updateProduct
+```
+
+**Description:**
+Update an existing product’s details.
+
+**Request Body:**
+
+```json
+{
+  "_id": "product-id",
+  "title": "updated-title",
+  "subtitle": "updated-subtitle",
+  "description": "updated-description",
+  "specification": "updated-specification",
+  "variants": [
+    {
+      "attributes": [{ "attribute": "size", "value": "medium" }],
+      "price": 120,
+      "status": "inStock"
+    }
+  ],
+  "image": "updated-image-url",
+  "status": "PUBLISHED",
+  "productCategory": "updated-category-id",
+  "businessId": "business-id"
+}
+```
+
+**Response:**
+
+```json
+{
+  "message": "Product updated successfully!",
+  "data": { ... },
+  "status": 201
+}
+```
+
+---
+
 ## Additional Notes
 
 - **Authentication:** Ensure requests are authenticated as per the server's security settings (e.g., API keys or JWT).
@@ -274,6 +321,4 @@ Create a new product for a specific business.
 - **Testing:** Use tools like Postman or Unity’s networking libraries to test the API endpoints.
 - **Dependencies:** The server uses `dotenv`, `Mongoose` models for database interactions, and custom utility functions.
 
-For further assistance, contact the backend team or refer to the server’s codebase.# docs
-
-# docs
+For further assistance, contact the backend team or refer to the server’s codebase.
